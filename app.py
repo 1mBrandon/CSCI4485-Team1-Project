@@ -175,7 +175,7 @@ def userregistration():
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
             cursor.execute(
-                'INSERT INTO USER (user_firstname, user_lastname, user_middlename, user_username, user_password, user_email, user_birthdate) VALUES ( %s, %s, %s, %s, %s, %s, %s)',
+                'INSERT INTO USER (user_firstname, user_lastname, user_middlename, user_username, user_password, user_email, user_birthdate) VALUES ( %s, %s, %s, %s, PASSWORD(%s), %s, %s)',
                 (firstname, lastname, middlename, username, password, email, birthdate,))
             mysql.connection.commit()
             msg = 'You have successfully registered!'
