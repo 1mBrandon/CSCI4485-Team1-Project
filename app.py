@@ -4,6 +4,7 @@ import MySQLdb.cursors
 import re
 from datetime import timedelta
 from flask_cors import CORS
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 # Change this to your secret key (can be anything, it's for extra protection)
@@ -17,14 +18,90 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'root'
 app.config['MYSQL_DB'] = 'project'
 
+# Email Settings
+# app.config['MAIL_SERVER'] = 'localhost'
+# app.config['MAIL_PORT'] = 587
+# app.config['MAIL_TLS'] = False
+# app.config['MAIL_SSL'] = True
+# app.config['MAIL_USERNAME'] = 'alex.ruoff.fitness@gmail.com'
+# app.config['MAIL_DEFAULT_SENDER'] = 'alex.ruoff.fitness@gmail.com'
+# app.config['MAIL_PASSWORD'] = '@Sandwich!'
+
+app.config.update(dict(
+    DEBUG=True,
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=587,
+    MAIL_USE_TLS=True,
+    MAIL_USE_SSL=False,
+    MAIL_USERNAME='alex.ruoff.fitness@gmail.com',
+    MAIL_DEFAULT_SENDER='alex.ruoff.fitness@gmail.com',
+    MAIL_PASSWORD='@Sandwich!',
+))
+
+mail = Mail(app)
+
 # Intialize MySQLa
 mysql = MySQL(app)
 
 
-# First Page you see the Login_page
-@app.route("/")
+@app.route('/')
+def about():
+    return render_template("/about.html")
+
+
+@app.route("/login")
 def home():
     return render_template("login.html")
+
+
+@app.route("/blog")
+def blog():
+    return render_template("blog.html")
+
+
+@app.route("/reminder", methods=['GET', 'POST'])
+def reminder():
+    msg = ' '
+
+    if request.method == 'POST' and 'name' in request.form and 'email' in request.form:
+        name = request.form['name']
+        email = request.form['email']
+
+        # Check if Email exists using MySQL
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM REMINDER WHERE reminder_email = %s', (email,))
+        reminderdata = cursor.fetchone()
+
+        # If account exists show error and validation checks
+        if reminderdata:
+            msg = 'You are already subscribed'
+            return render_template('reminder.html', msg=msg)
+
+        elif not re.match(r'[A-Za-z]+', name):
+            msg = 'Name must contain only characters!'
+            return render_template('reminder.html', msg=msg)
+
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address!'
+            return render_template('reminder.html', msg=msg)
+
+        else:
+            # Account doesnt exists and the form data is valid, now insert new account into accounts table
+            cursor.execute(
+                'INSERT INTO REMINDER (reminder_name, reminder_email) VALUES ( %s, %s)',
+                (name, email,))
+            mysql.connection.commit()
+
+            emsg = Message("Welcome to Alex's Ruoffs Reminders", recipients=[email])
+
+            emsg.body = 'Hello, ' + name + ' Thank you for subscribing for reminders.'
+
+            mail.send(emsg)
+
+            msg = 'You have successfully Subscribed!'
+            return render_template('reminder.html', msg=msg)
+
+    return render_template("reminder.html")
 
 
 # Display Calendar
@@ -306,6 +383,70 @@ def manageclient():
     cursor.execute("select * from client")
     data = cursor.fetchall()  # data from database
     return render_template("manageclient.html", value=data)
+
+
+@app.route("/contact", methods=['GET', 'POST'])
+def contact():
+    # Output message if something goes wrong...
+    msg = ''
+
+    if request.method == 'POST' and 'firstname' in request.form and 'lastname' in request.form and 'phone_number' in request.form and 'email' in request.form and 'subject' in request.form:
+
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+        firstname = request.form['firstname']
+        lastname = request.form['lastname']
+        phonenumber = request.form['phone_number']
+        email = request.form['email']
+        subject = request.form['subject']
+
+        # If account exists show error and validation checks
+
+        if not re.match(r'[A-Za-z]+', firstname):
+            msg = 'First name must contain only characters!'
+            return render_template('contact.html', msg=msg)
+
+        elif not re.match(r'[A-Za-z]+', lastname):
+            msg = 'Last name must contain only characters!'
+            return render_template('contact.html', msg=msg)
+
+        elif not re.match(r'[0-9]+', phonenumber):
+            msg = 'Phone number must contain only numbers!'
+            return render_template('contact.html', msg=msg)
+
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address!'
+            return render_template('contact.html', msg=msg)
+
+        else:
+            # Account doesnt exists and the form data is valid, now insert new account into accounts table
+            cursor.execute(
+                'INSERT INTO contact (contact_firstname, contact_lastname, contact_phonenumber, contact_email, contact_subject) VALUES ( %s, %s, %s, %s, %s)',
+                (firstname, lastname, phonenumber, email, subject,))
+            mysql.connection.commit()
+            msg = 'You have successfully sent your message to Alex: '
+            return render_template('contact.html', msg=msg)
+
+    # Show the contact form with message (if any)
+    return render_template('contact.html', msg=msg)
+
+
+@app.route('/inquiry', methods=['GET', 'POST', 'delete'])
+def inquiry():
+    cursor = mysql.connection.cursor()
+
+    if request.method == 'POST':
+        contact_id = request.form['contact_id']
+        cursor.execute("DELETE FROM project.contact where contact_id = %s", (contact_id,))
+        mysql.connection.commit()
+
+        cursor.execute("select * from contact")
+        data = cursor.fetchall()  # data from database
+        return render_template("inquiry.html", value=data)
+
+    cursor.execute("select * from contact")
+    data = cursor.fetchall()  # data from database
+    return render_template('/inquiry.html', value=data)
 
 
 # @app.route("/removeclient", methods = ['delete'])
