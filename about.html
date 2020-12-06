@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Alex Ruoff Training</title>
+  <title>About Me</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -45,6 +45,18 @@
       padding: 15px;
     }
 
+    * {
+        box-sizing: border-box;
+      }
+
+      /* Create two equal columns that floats next to each other */
+      .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: 300px; /* Should be removed. Only for demonstration */
+      }
+
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
@@ -68,7 +80,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/about">Home</a></li>
+        <li class="active"><a href="/">Home</a></li>
         <li><a href="/blog">Fitness Blog</a></li>
           <li><a href="/contact">Contact for Appointment</a></li>
           <li><a href="/reminder">Appointment Reminder</a></li>
@@ -80,23 +92,216 @@
   </div>
 </nav>
 
-<div class="container-fluid text-center">
+<div class="container">
   <div class="row content">
-<!--    <div class="col-sm-2 sidenav">-->
-<!--      <p></p>-->
-<!--    </div>-->
     <div class="container">
-    <div class="col-sm text-center">
-        <div class="col-sm text-center">
-        <h1><center><img class= "login" src="static/img/logo.png" style="width: 400px;height: 400px;"></center></h1>
-      <p> Welcome to Alex Ruoff fitness page. Here you can navigate through the website to fine everything from nutrition plans, to reference videos, to booking client appointments.</p>
-      <hr>
-      <h3>Thanks for visitng!</h3>
-      <p>Feel free to contact me at the top of the website</p>
-    </div>
-    </div>
+    <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Add a gray background color with some padding */
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  font-size: 40px;
+  text-align: center;
+  background: white;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  width: 100%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+
+    <html>
+      <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Add a gray background color with some padding */
+      body {
+        font-family: Arial;
+        padding: 20px;
+        background: #f1f1f1;
+      }
+
+      /* Header/Blog Title */
+      .header {
+        padding: 30px;
+        font-size: 40px;
+        text-align: center;
+        background: white;
+      }
+
+
+      .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+
+
+
+      /* Create two unequal columns that floats next to each other */
+      /* Left column */
+      .leftcolumn {
+        float: left;
+        width: 100%;
+      }
+
+      /* Right column */
+      .rightcolumn {
+        float: left;
+        width: 25%;
+        padding-left: 20px;
+      }
+
+
+      /* Create two equal columns that floats next to each other */
+      .column {
+        text-align: left;
+        float: left;
+        width: 50%;
+        padding: 10px;
+      }
+
+        .button {
+          background-color: #ddd;
+          border: none;
+          color: black;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          margin: 4px 2px;
+          cursor: pointer;
+          border-radius: 16px;
+        }
+
+
+      /* Add a card effect for articles */
+      .card {
+         background-color: white;
+         padding: 20px;
+         margin-top: 20px;
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      /* Footer */
+      .footer {
+        padding: 20px;
+        text-align: center;
+        background: #ddd;
+        margin-top: 20px;
+      }
+
+      /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+      @media screen and (max-width: 800px) {
+        .leftcolumn, .rightcolumn {
+          width: 100%;
+          padding: 0;
+        }
+      }
+      </style>
+      </head>
+      <body>
+
+<!--      <div class="header">-->
+<!--        <h1>Fitness Blog</h1>-->
+<!--        <h4> Here you can find my favorite recipes, exercises and fitness tips of the week! </h4>-->
+      <div class="row">
+        <div class="leftcolumn">
+          <div class="card">
+            <div class="row">
+              <div class="column">
+                <img src="static/img/logo.png" class="center">
+              </div>
+              <div class="column" style="background-color:#d5e7e;">
+                <h1><b>About Me</b></h1>
+                <hr>
+                <p> This is the about me page explaining alex and his fitness journey </p>
+              </div>
+            </div>
+          </div>
+          <hr>
+      </div>
+        </div>
+          <hr>
+      </body>
+      </html>
     </div>
   </div>
 </div>
 </body>
 </html>
+
