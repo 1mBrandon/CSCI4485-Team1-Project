@@ -8,21 +8,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
-    .col-1 {width: 8.33%;}
-    .col-2 {width: 16.66%;}
-    .col-3 {width: 25%;}
-    .col-4 {width: 33.33%;}
-    .col-5 {width: 41.66%;}
-    .col-6 {width: 50%;}
-    .col-7 {width: 58.33%;}
-    .col-8 {width: 66.66%;}
-    .col-9 {width: 75%;}
-    .col-10 {width: 83.33%;}
-    .col-11 {width: 91.66%;}
-    .col-12 {width: 100%;}
 
     h1 {
-        letter-spacing: 2px;
         font-family: 'Times New Roman', serif;
     }
 
@@ -38,7 +25,7 @@
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
-      background-color: #000000;
+      background-color: #191919;
     }
 
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -81,49 +68,50 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/about">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="/blog">Fitness Blog</a></li>
           <li><a href="/contact">Contact for Appointment</a></li>
-          <li><a href="/reminder">Appointment Reminder</a></li>
+          <li class="active"><a href="/reminder">Appointment Reminder</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>Admin Login</a></li>
       </ul>
     </div>
   </div>
 </nav>
+
        <center> <div class="col">
             <html>
                 <style>
-                body {font-family: Arial, Helvetica, sans-serif;}
+<!--                body {font-family: Arial, Helvetica, sans-serif;}-->
 
                 form {
-                  border: 3px solid #f1f1f1;
-                  font-family: Arial;
+<!--                  border: 6px;-->
+                  font-family: Times New Roman;
                 }
 
                 .container {
-                  padding: 20px;
-                  background-color: #f1f1f1;
+<!--                  padding: 60px;-->
+                  background-color: #D3D3D3;
                 }
 
-                input[type=text], input[type=submit] {
-                  width: 100%;
+                input[type=text]
+                {
+                  width: 80%;
                   padding: 12px;
                   margin: 8px 0;
                   display: inline-block;
-                  border: 1px solid #ccc;
-                  box-sizing: border-box;
                 }
 
-                input[type=checkbox] {
-                  margin-top: 16px;
-                }
 
                 input[type=submit] {
                   background-color: #4CAF50;
-                  color: white;
+                  color: black;
                   border: none;
+                  width: 60%;
+                  padding: 12px;
+                  margin: 8px 0;
+                  display: inline-block;
                 }
 
                 input[type=submit]:hover {
@@ -131,25 +119,23 @@
                 }
                 </style>
                 <body>
-
-                <center><h2>Stay on Top of Your Appointments!</h2></center>
+                <br>
+                <center><h2 style="font-size: 60px;">Stay on Top of Your Appointments!</h2></center>
                 <hr>
-                <form action="/action_page.php">
-                  <div class="container">
+                <br>
+                <form action="{{ url_for('reminder') }}" method="POST" autocomplete="off">
+                  <div class="container" style="background-color: #D3D3D3; padding: 60px;">
                     <h2>Subscribe to our Email Alters</h2>
-                    <p>Here you can sign up to receive an email conformation when you schedule an appointment.</p>
+                    <p>Here you can sign up to receive an email reminder for your schedule an appointment.</p>
+                      <input type="text" placeholder="Name" name="name" required>
+                        <input type="text" placeholder="Email address" name="email" required>
+                  <div class="msg">{{ msg }}</div>
                   </div>
-
-                  <div class="container" style="background-color:white">
-                    <input type="text" placeholder="Name" name="name" required>
-                    <input type="text" placeholder="Email address" name="mail" required>
-                  </div>
-
-                  <div class="container">
-                    <input type="submit" value="Subscribe">
+                  <div class="container" style="background-color: #647373; padding: 40px;">
+                    <input type="submit" style="background-color: #D3D3D3" value="Subscribe">
                   </div>
                 </form>
-
+                <br>
                 </body>
                 </html>
     </div>
