@@ -94,7 +94,7 @@ def reminder():
 
             emsg = Message("Welcome to Alex's Ruoffs Reminders", recipients=[email])
 
-            emsg.body = 'Hello, ' + name + ' Thank you for subscribing for reminders.'
+            emsg.body = 'Hello, ' + name + ' Thank you for subscribing for your appiontment reminders.'
 
             mail.send(emsg)
 
@@ -252,7 +252,7 @@ def userregistration():
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
             cursor.execute(
-                'INSERT INTO USER (user_firstname, user_lastname, user_middlename, user_username, user_password, user_email, user_birthdate) VALUES ( %s, %s, %s, %s, PASSWORD(%s), %s, %s)',
+                'INSERT INTO USER (user_firstname, user_lastname, user_middlename, user_username, user_password, user_email, user_birthdate) VALUES ( %s, %s, %s, %s, %s, %s, %s)',
                 (firstname, lastname, middlename, username, password, email, birthdate,))
             mysql.connection.commit()
             msg = 'You have successfully registered!'
@@ -447,6 +447,24 @@ def inquiry():
     cursor.execute("select * from contact")
     data = cursor.fetchall()  # data from database
     return render_template('/inquiry.html', value=data)
+
+
+@app.route('/reminderSignUp', methods=['GET', 'POST', 'delete'])
+def reminderSignUp():
+    cursor = mysql.connection.cursor()
+
+    if request.method == 'POST':
+        contact_id = request.form['reminder_id']
+        cursor.execute("DELETE FROM project.reminder where reminder_id = %s", (contact_id,))
+        mysql.connection.commit()
+
+        cursor.execute("select * from reminder")
+        data = cursor.fetchall()  # data from database
+        return render_template("reminderSignUp.html", value=data)
+
+    cursor.execute("select * from reminder")
+    data = cursor.fetchall()  # data from database
+    return render_template('/reminderSignUp.html', value=data)
 
 
 # @app.route("/removeclient", methods = ['delete'])
