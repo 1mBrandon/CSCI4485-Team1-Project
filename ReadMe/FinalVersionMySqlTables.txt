@@ -51,8 +51,7 @@ mysql> create table contact
 mysql> create table reminder
      (
      reminder_id int(11) not null AUTO_INCREMENT,
-     reminder_firstname varchar(25) not null,
-     reminder_lastname varchar(25) not null,
+     reminder_name varchar(50) not null,
      reminder_email varchar(25) not null,
      constraint reminderID_PK primary key (reminder_id) );
 
