@@ -1,4 +1,88 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+
+    h1 {
+        font-family: 'Times New Roman', serif;
+    }
+
+    h2 {
+        font-family: 'Times New Roman', serif;
+    }
+
+    p {
+        font-family: 'Times New Roman', serif;
+        font-size: 20px;
+    }
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+      background-color: #000000;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 50px;
+      background-color: #566f73;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;}
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/blog">Fitness Blog</a></li>
+          <li><a href="/contact">Contact for Appointment</a></li>
+          <li><a href="/reminder">Appointment Reminder</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
 
 <html>
 
@@ -11,7 +95,7 @@
 	<link type="text/css"  rel="stylesheet" href="{{ url_for('static', filename='css/calendar.min.css') }}"/>
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
 		<div>
 			<h4>Personal Trainer Calendar Appointments</h4>
 <!--			<h2>Hello {{un}} </h2>-->
@@ -61,43 +145,40 @@
 						<input type="checkbox" id="show_wbn" checked> Show week box number
 					</label>
 
-					<br>
-
 					<div class="btn-group">
 					<form action="{{ url_for('signup') }}">
-						<button class="btn" data-calendar-nav="today">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register Client&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+						<button class="btn" data-calendar-nav="today">Register Client</button>
 					</form>
 					</div>
 
-					<br><br>
 
 					<div class="btn-group">
 					<form action="{{ url_for('manageclient') }}">
-						<button class="btn" data-calendar-nav="today">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove Client&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+						<button class="btn" data-calendar-nav="today">Remove Client</button>
 					</form>
 					</div>
-
-					<br><br>
 
 					<div class="btn-group">
 					<form action="{{ url_for('modifyclient') }}">
-						<button class="btn" data-calendar-nav="today">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modify Client&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+						<button class="btn" data-calendar-nav="today">Modify Client</button>
 					</form>
 					</div>
-
-					<br><br>
 
 					<div class="btn-group">
 					<form action="{{ url_for('cancelappointment') }}">
-						<button class="btn" data-calendar-nav="today">&nbsp;&nbsp;&nbsp;&nbsp;Cancel Appointment&nbsp;&nbsp;&nbsp;</button>
+						<button class="btn" data-calendar-nav="today">Cancel Appointment</button>
 					</form>
 					</div>
-
-					<br><br>
 
 					<div class="btn-group">
 					<form action="{{ url_for('rescheduleappointment') }}">
 						<button class="btn" data-calendar-nav="today">Reschedule Appointment</button>
+					</form>
+					</div>
+
+					<div class="btn-group">
+					<form action="{{ url_for('inquiry') }}">
+						<button class="btn" data-calendar-nav="today">Inquiry</button>
 					</form>
 					</div>
 
